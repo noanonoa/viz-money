@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const EditForm = ({ setEditing, currentEntry, updateEntry }) => {
   const [entry, setEntry] = useState(currentEntry)
@@ -8,6 +8,10 @@ const EditForm = ({ setEditing, currentEntry, updateEntry }) => {
 
     setEntry({ ...entry, [name]: value })
   }
+  
+  useEffect(() => {
+    setEntry(currentEntry)
+  }, [currentEntry])
 
   return (
     <form 

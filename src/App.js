@@ -30,6 +30,8 @@ const App = () => {
     setFoods(foods.map( entry => entry.id === id ? updatedEntry : entry ))
   }
   const deleteEntry = (id) => {
+    setEditing(false)
+
     setFoods(foods.filter( entry => entry.id !== id ))
   }
 
@@ -48,6 +50,7 @@ const App = () => {
           </div>
         ) : (
           <div>
+            <h2>Add Entry</h2>
             <AddForm addEntry={addEntry} />
           </div>
         )}
