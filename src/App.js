@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import FoodTable from './tables/FoodTable'
 import AddForm from './forms/AddForm'
+import EditForm from './forms/EditForm'
 
 const App = () => {
   const foodData = [
@@ -10,10 +11,23 @@ const App = () => {
   ]
 
   const [foods, setFoods] = useState(foodData)
+  const [editing, setEditing] = useState(false)
+  const initialFormState = { id: null, date: ``, description: ``, spending: `` }
+  const [currentEntry, setCurrentEntry] = useState(initialFormState)
 
   const addEntry = (entry) => {
     entry.id = foods.length + 1
     setFoods([...foods, entry])
+  }
+  const editEntry = (entry) => {
+    setEditing(true)
+
+    setCurrentEntry({ id: entry.id, date: entry.date, description: entry.description, spending: entry.spending })
+  }
+  const updateEntry = (id, updatedEntry) => {
+    setEditing(false)
+
+    setFoods(foods.map( entry => entry.id === id ? updatedEntry : entry ))
   }
   const deleteEntry = (id) => {
     setFoods(foods.filter( entry => entry.id !== id ))
@@ -23,14 +37,25 @@ const App = () => {
     <div className="container">
       <h1>Viz-Money</h1>
       <div className="flex-parent">
-        <div>
-          <AddForm addEntry={addEntry} />
-        </div>
+        {editing ? (
+          <div>
+            <h2>Edit Entry</h2>
+            <EditForm 
+              setEditing={setEditing}
+              currentEntry={currentEntry}
+              updateEntry={updateEntry}
+            />
+          </div>
+        ) : (
+          <div>
+            <AddForm addEntry={addEntry} />
+          </div>
+        )}
         <div className="flex-child1">
           <h2>Food</h2>
         </div>
         <div className="flex-child2">
-          <FoodTable foods={foods} deleteEntry={deleteEntry} />
+          <FoodTable foods={foods} deleteEntry={deleteEntry} editEntry={editEntry} />
         </div>
       </div>
     </div>

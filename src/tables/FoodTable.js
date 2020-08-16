@@ -1,6 +1,6 @@
 import React from 'react'
 
-const FoodTable = ({ foods, deleteEntry }) => {
+const FoodTable = ({ foods, editEntry, deleteEntry }) => {
   console.log(`🌯🌮 this is the foods data (FoodTable.js):`, {foods})
   if (foods.length > 0) {
     const foodEntries = foods.map( food => {
@@ -12,6 +12,7 @@ const FoodTable = ({ foods, deleteEntry }) => {
             -$ {food.spending}
           </td>
           <td>
+            <button onClick={() => editEntry(food)}>edit</button>
             <button onClick={() => deleteEntry(food.id)}>delete</button>
           </td>
         </tr>
