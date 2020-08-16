@@ -1,22 +1,51 @@
 import React from 'react'
 
-const FoodTable = () => {
-  return (
-    <table>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Description</th>
-          <th>Spending</th>
+const FoodTable = ({ foods }) => {
+  console.log(`🌯🌮 this is the foods data:`, {foods})
+  if (foods.length > 0) {
+    const foodEntries = foods.map( food => {
+      return (
+        <tr key={food.id}>
+          <td>{food.date}</td>
+          <td>{food.description}</td>
+          <td>{food.spending}</td>
         </tr>
-      </thead>
-      <tbody>
-        <td>Date of purchase</td>
-        <td>Description of purchase</td>
-        <td>Amount spent</td>
-      </tbody>
-    </table>
-  )
+      )
+    })
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Spending</th>
+          </tr>
+        </thead>
+        <tbody>
+          {foodEntries}
+        </tbody>
+      </table>
+    )
+  } else {
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Spending</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>--</td>
+            <td>--</td>
+            <td>--</td>
+          </tr>
+        </tbody>
+      </table>
+    )
+  }
 }
 
 export default FoodTable
