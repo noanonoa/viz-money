@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import FoodTable from './tables/FoodTable'
+import AddForm from './forms/AddForm'
 
 const App = () => {
   const foodData = [
@@ -10,10 +11,18 @@ const App = () => {
 
   const [foods, setFoods] = useState(foodData)
 
+  const addEntry = (entry) => {
+    entry.id = foods.length + 1
+    setFoods([...foods, entry])
+  }
+
   return (
     <div className="container">
       <h1>Viz-Money</h1>
       <div className="flex-parent">
+        <div>
+          <AddForm addEntry={addEntry} />
+        </div>
         <div className="flex-child1">
           <h2>Food</h2>
         </div>
