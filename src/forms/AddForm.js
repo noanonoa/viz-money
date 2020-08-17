@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
 
 const AddForm = (props) => {
-  const month = new Date().getMonth() + 1
-  const date = new Date().getDate()
+  const month = () => {
+    return ("0" + (new Date().getMonth() + 1)).slice(-2)
+  }
+  const date = () => {
+    return ("0" + new Date().getDate()).slice(-2)
+  }
   const year = new Date().getFullYear()
-  const today = `${month}/${date}/${year}`
+  const today = `${year}-${month()}-${date()}`
 
   const initialFormState = { id: null, date: today, description: ``, spending: `` }
   const [entry, setEntry] = useState(initialFormState)
@@ -22,7 +26,6 @@ const AddForm = (props) => {
     props.addEntry(entry)
     setEntry(initialFormState)
   }
-
   return (
     <form onSubmit={ handleSubmit }>
       <label>Date</label>

@@ -1,7 +1,7 @@
 import React from 'react'
 
 const FoodTable = ({ foods, editEntry, deleteEntry }) => {
-  console.log(`🌯🌮 this is the foods data (FoodTable.js):`, {foods})
+  // console.log(`🌯🌮 this is the foods data (FoodTable.js):`, {foods})
   if (foods.length > 0) {
     const foodEntries = foods.map( food => {
       return (

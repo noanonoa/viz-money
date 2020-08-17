@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import FoodTable from './tables/FoodTable'
 import AddForm from './forms/AddForm'
 import EditForm from './forms/EditForm'
+import VizComponent from './components/VizComponent'
 
 const App = () => {
   const foodData = [
-    {id: 1, date: '8/9/2020', description: 'Popeyes', spending: 12.11},
-    {id: 2, date: '8/12/2020', description: 'Jersey Mikes', spending: 11.22},
-    {id: 3, date: '8/14/2020', description: 'Chick-fil-A', spending: 21.75}
+    {id: 1, date: '2020-08-09', description: 'Popeyes', spending: 12.11},
+    {id: 2, date: '2020-08-12', description: 'Jersey Mikes', spending: 11.22},
+    {id: 3, date: '2020-08-14', description: 'Chick-fil-A', spending: 21.75}
   ]
 
   const [foods, setFoods] = useState(foodData)
@@ -38,6 +39,7 @@ const App = () => {
   return (
     <div className="container">
       <h1>Viz-Money</h1>
+      <VizComponent foodData={foodData} />
       <div className="flex-parent">
         {editing ? (
           <div>
