@@ -2,15 +2,14 @@ import React, { useState, useRef, useEffect } from 'react'
 import { select, axisBottom, scaleUtc, extent, axisLeft, scaleLinear, max, line } from 'd3'
 
 const VizComponent = (props) => {
-  const [foods] = useState(props.foods)
   const svgRef = useRef()
-  const data = Object.assign(foods.map(({ date, spending }) => ({date: new Date(date), value: spending})), {y: "$ Spent"})
+  const data = Object.assign(props.foods.map(({ date, spending }) => ({date: new Date(date), value: spending})), {y: "$ Spent"})
   const graphLine = line()
     .defined(d => !isNaN(d.value))
     .x(d => x(d.date))
     .y(d => y(d.value))
-  const width = 700
-  const height = 400
+  const width = 1000
+  const height = 500
   const margin = {top: 20, right: 30, bottom: 30, left: 40}
   const x = scaleUtc()
     .domain(extent(data, d => d.date))
@@ -32,9 +31,8 @@ const VizComponent = (props) => {
       .text(data.y))
 
   useEffect(() => {
-    console.log(`(@VizComponent.js) This is foodData props`, foods)
     let svg = select(svgRef.current)
-    
+      
     svg.attr("viewBox", [0, 0, width, height])
     svg.append("g")
       .call(xAxis)
@@ -48,11 +46,18 @@ const VizComponent = (props) => {
       .attr("stroke-linejoin", "round")
       .attr("stroke-linecap", "round")
       .attr("d", graphLine)
-  }, [foods, data, graphLine])
+  }, [props.foods, data, graphLine])
   
   return (
     <div className="viz-container">
-      <svg ref={svgRef}></svg>
+      <svg className="chart" ref={svgRef}></svg>
+      <style jsx="true">{`
+        .viz-container,
+        .chart {
+          width: 100%;
+          max-height: 500px;
+        }
+      `}</style>
     </div>
   )
 }

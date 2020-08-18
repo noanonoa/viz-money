@@ -9,11 +9,11 @@ const App = () => {
     {id: 1, date: "2020-08-09", description: "Popeyes", spending: 12.11},
     {id: 2, date: "2020-08-12", description: "Jersey Mikes", spending: 11.22},
     {id: 3, date: "2020-08-14", description: "Chick-fil-A", spending: 11.75},
-    {id: 4, date: "2020-08-15", description: "Chick-fil-A", spending: 21.75},
-    {id: 5, date: "2020-08-16", description: "Chick-fil-A", spending: 31.75},
-    {id: 6, date: "2020-08-17", description: "Chick-fil-A", spending: 11.75},
-    {id: 7, date: "2020-08-18", description: "Chick-fil-A", spending: 1.75},
-    {id: 8, date: "2020-08-19", description: "Chick-fil-A", spending: 21.75}
+    {id: 4, date: "2020-08-15", description: "Whole Foods", spending: 21.75},
+    {id: 5, date: "2020-08-16", description: "Trader Joe's", spending: 31.75},
+    {id: 6, date: "2020-08-17", description: "In N Out", spending: 11.75},
+    {id: 7, date: "2020-08-18", description: "Chick-Fil-A", spending: 1.75},
+    {id: 8, date: "2020-08-19", description: "Tender Greens", spending: 21.75}
   ]
 
   const [foods, setFoods] = useState(foodData)
@@ -24,6 +24,7 @@ const App = () => {
   const addEntry = (entry) => {
     entry.id = foods.length + 1
     setFoods([...foods, entry])
+    console.log(`updated foods array`, foods)
   }
   const editEntry = (entry) => {
     setEditing(true)
