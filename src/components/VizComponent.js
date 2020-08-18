@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { select, axisBottom, scaleUtc, extent, axisLeft, scaleLinear, max, line } from 'd3'
 
 const VizComponent = (props) => {
@@ -31,8 +31,9 @@ const VizComponent = (props) => {
       .text(data.y))
 
   useEffect(() => {
-    let svg = select(svgRef.current)
-      
+    const svg = select(svgRef.current)
+    svg.selectAll("path").remove()
+    svg.selectAll("g").remove()
     svg.attr("viewBox", [0, 0, width, height])
     svg.append("g")
       .call(xAxis)
@@ -46,6 +47,7 @@ const VizComponent = (props) => {
       .attr("stroke-linejoin", "round")
       .attr("stroke-linecap", "round")
       .attr("d", graphLine)
+
   }, [props.foods, data, graphLine])
   
   return (

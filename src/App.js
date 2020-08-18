@@ -24,7 +24,6 @@ const App = () => {
   const addEntry = (entry) => {
     entry.id = foods.length + 1
     setFoods([...foods, entry])
-    console.log(`updated foods array`, foods)
   }
   const editEntry = (entry) => {
     setEditing(true)
