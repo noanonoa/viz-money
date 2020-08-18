@@ -44,7 +44,7 @@ const App = () => {
   return (
     <div className="container">
       <h1>Viz-Money</h1>
-      <VizComponent foodData={foodData} />
+      <VizComponent foods={foods} />
       <div className="flex-parent">
         {editing ? (
           <div>

@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect } from 'react'
 import { select, axisBottom, scaleUtc, extent, axisLeft, scaleLinear, max, line } from 'd3'
 
 const VizComponent = (props) => {
-  const [foodData] = useState(props.foodData)
+  const [foods] = useState(props.foods)
   const svgRef = useRef()
-  const data = foodData.map(({ date, spending }) => ({date: new Date(date), value: spending}))
+  const data = Object.assign(foods.map(({ date, spending }) => ({date: new Date(date), value: spending})), {y: "$ Spent"})
   const graphLine = line()
     .defined(d => !isNaN(d.value))
     .x(d => x(d.date))
@@ -31,11 +31,9 @@ const VizComponent = (props) => {
       .attr("font-weight", "bold")
       .text(data.y))
 
-      console.log((new Date("2009-09-09")))
-
   useEffect(() => {
-    // console.log(`(@VizComponent.js) This is foodData props`, foodData)
-    const svg = select(svgRef.current)
+    console.log(`(@VizComponent.js) This is foodData props`, foods)
+    let svg = select(svgRef.current)
     
     svg.attr("viewBox", [0, 0, width, height])
     svg.append("g")
@@ -50,7 +48,7 @@ const VizComponent = (props) => {
       .attr("stroke-linejoin", "round")
       .attr("stroke-linecap", "round")
       .attr("d", graphLine)
-  }, [foodData, data, graphLine])
+  }, [foods, data, graphLine])
   
   return (
     <div className="viz-container">
