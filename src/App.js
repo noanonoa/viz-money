@@ -6,9 +6,14 @@ import VizComponent from './components/VizComponent'
 
 const App = () => {
   const foodData = [
-    {id: 1, date: '2020-08-09', description: 'Popeyes', spending: 12.11},
-    {id: 2, date: '2020-08-12', description: 'Jersey Mikes', spending: 11.22},
-    {id: 3, date: '2020-08-14', description: 'Chick-fil-A', spending: 21.75}
+    {id: 1, date: "2020-08-09", description: "Popeyes", spending: 12.11},
+    {id: 2, date: "2020-08-12", description: "Jersey Mikes", spending: 11.22},
+    {id: 3, date: "2020-08-14", description: "Chick-fil-A", spending: 11.75},
+    {id: 4, date: "2020-08-15", description: "Chick-fil-A", spending: 21.75},
+    {id: 5, date: "2020-08-16", description: "Chick-fil-A", spending: 31.75},
+    {id: 6, date: "2020-08-17", description: "Chick-fil-A", spending: 11.75},
+    {id: 7, date: "2020-08-18", description: "Chick-fil-A", spending: 1.75},
+    {id: 8, date: "2020-08-19", description: "Chick-fil-A", spending: 21.75}
   ]
 
   const [foods, setFoods] = useState(foodData)

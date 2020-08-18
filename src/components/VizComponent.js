@@ -1,11 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { select, axisBottom, scaleUtc, extent, axisLeft, scaleLinear, max } from 'd3'
+import { select, axisBottom, scaleUtc, extent, axisLeft, scaleLinear, max, line } from 'd3'
 
 const VizComponent = (props) => {
-  const [foodData, setFoodData] = useState(props.foodData)
+  const [foodData] = useState(props.foodData)
   const svgRef = useRef()
-  const data = foodData.map(({ date, spending }) => ({date, value: spending}))
-
+  const data = foodData.map(({ date, spending }) => ({date: new Date(date), value: spending}))
+  const graphLine = line()
+    .defined(d => !isNaN(d.value))
+    .x(d => x(d.date))
+    .y(d => y(d.value))
   const width = 700
   const height = 400
   const margin = {top: 20, right: 30, bottom: 30, left: 40}
@@ -28,8 +31,10 @@ const VizComponent = (props) => {
       .attr("font-weight", "bold")
       .text(data.y))
 
+      console.log((new Date("2009-09-09")))
+
   useEffect(() => {
-    console.log(`(@VizComponent.js) This is foodData props`, foodData)
+    // console.log(`(@VizComponent.js) This is foodData props`, foodData)
     const svg = select(svgRef.current)
     
     svg.attr("viewBox", [0, 0, width, height])
@@ -37,7 +42,15 @@ const VizComponent = (props) => {
       .call(xAxis)
     svg.append("g")
       .call(yAxis)
-  }, [foodData])
+    svg.append("path")
+      .datum(data)
+      .attr("fill", "none")
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", 1.5)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("d", graphLine)
+  }, [foodData, data, graphLine])
   
   return (
     <div className="viz-container">
