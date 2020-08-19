@@ -6,14 +6,22 @@ import VizComponent from './components/VizComponent'
 
 const App = () => {
   const financialData = [
-    {id: 1, date: "2020-08-09", description: "Popeyes", spending: 12.11},
-    {id: 2, date: "2020-08-12", description: "Jersey Mikes", spending: 11.22},
-    {id: 3, date: "2020-08-14", description: "Chick-fil-A", spending: 11.75},
-    {id: 4, date: "2020-08-15", description: "Whole Foods", spending: 21.75},
-    {id: 5, date: "2020-08-16", description: "Trader Joe's", spending: 31.75},
-    {id: 6, date: "2020-08-17", description: "In N Out", spending: 11.75},
-    {id: 7, date: "2020-08-18", description: "Chick-Fil-A", spending: 1.75},
-    {id: 8, date: "2020-08-19", description: "Tender Greens", spending: 21.75}
+    {id: 1, date: "2020-08-01", description: "Costco & Whole Foods", spending: 267.03},
+    {id: 2, date: "2020-08-02", description: "Maria's Kitchen", spending: 20.00},
+    {id: 3, date: "2020-08-03", description: "Airpods & Watering Can", spending: 270.45},
+    {id: 4, date: "2020-08-04", description: "Target, Chipotle, Abreva & Boba", spending: 50.69},
+    {id: 5, date: "2020-08-05", description: "Chipotle & Boba", spending: 31.02},
+    {id: 6, date: "2020-08-06", description: "Whole Foods & Trader Joe's", spending: 52.22},
+    {id: 7, date: "2020-08-07", description: "Boba", spending: 9.00},
+    {id: 8, date: "2020-08-08", description: "El Zarape & Gas", spending: 66.01},
+    {id: 9, date: "2020-08-09", description: "Boba, Alkaline Water & Popeyes", spending: 29.11},
+    {id: 10, date: "2020-08-10", description: "Whole Foods & Quarters", spending: 76.52},
+    {id: 11, date: "2020-08-12", description: "Raffi's Gift to Parents & Jersey Mike's", spending: 62.22},
+    {id: 12, date: "2020-08-13", description: "Tender Greens", spending: 24.00},
+    {id: 13, date: "2020-08-14", description: "Boba, Chick-fil-A & Nail Polish", spending: 48.30},
+    {id: 14, date: "2020-08-15", description: "Trader Joe's, H Mart & Whole Foods", spending: 115.08},
+    {id: 15, date: "2020-08-16", description: "Gas", spending: 20.00},
+    {id: 16, date: "2020-08-17", description: "Haircut", spending: 115.00}
   ]
 
   const [spendings, setSpendings] = useState(financialData)
