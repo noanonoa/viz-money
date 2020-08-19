@@ -27,30 +27,32 @@ const AddForm = (props) => {
     setEntry(initialFormState)
   }
   return (
-    <form onSubmit={ handleSubmit }>
-      <label>Date</label>
-      <input 
-        type="text" 
-        name="date" 
-        value={ entry.date } 
-        onChange={ handleInputChange } 
-      />
-      <label>Description</label>
-      <input 
-        type="text" 
-        name="description" 
-        value={ entry.description } 
-        onChange={ handleInputChange }
-      />
-      <label>Spending</label>
-      <input 
-        type="text" 
-        name="spending" 
-        value={ entry.spending } 
-        onChange={ handleInputChange }
-      />
-      <button>Add</button>
-    </form>
+    <div className="form-container">
+      <form onSubmit={ handleSubmit }>
+        <label>Date</label>
+        <input 
+          type="text" 
+          name="date" 
+          value={ entry.date } 
+          onChange={ handleInputChange } 
+        />
+        <label>Description</label>
+        <input 
+          type="text" 
+          name="description" 
+          value={ entry.description } 
+          onChange={ handleInputChange }
+        />
+        <label>Spending</label>
+        <input 
+          type="text" 
+          name="spending" 
+          value={ entry.spending } 
+          onChange={ handleInputChange }
+        />
+        <button>Add</button>
+      </form>
+    </div>
   )
 }
 

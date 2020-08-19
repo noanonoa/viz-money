@@ -18,37 +18,44 @@ const ExpenditureTable = ({ spendings, editEntry, deleteEntry }) => {
       )
     })
     return (
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Spending</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tableEntries}
-        </tbody>
-      </table>
+      <div className="expenditure-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Spending</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tableEntries}
+          </tbody>
+        </table>
+      </div>
     )
   } else {
     return (
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Spending</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>--</td>
-            <td>--</td>
-            <td>--</td>
-          </tr>
-        </tbody>
-      </table>
+      <div className="expenditure-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Spending</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>--</td>
+              <td>--</td>
+              <td>--</td>
+              <td>--</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     )
   }
 }

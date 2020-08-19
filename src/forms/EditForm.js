@@ -14,37 +14,39 @@ const EditForm = ({ setEditing, currentEntry, updateEntry }) => {
   }, [currentEntry])
 
   return (
-    <form 
-      onSubmit={(e) => {
-        e.preventDefault()
+    <div className="form-container">
+      <form 
+        onSubmit={(e) => {
+          e.preventDefault()
 
-        updateEntry(entry.id, entry)
-      }}
-    >
-      <label>Date</label>
-      <input 
-        type="text"
-        name="date"
-        value={entry.date}
-        onChange={handleInputChange}
-      />
-      <label>Description</label>
-      <input
-        type="text"
-        name="Description"
-        value={entry.description}
-        onChange={handleInputChange}
-      />
-      <label>Spending</label>
-      <input
-        type="text"
-        name="spending"
-        value={entry.spending}
-        onChange={handleInputChange}
-      />
-      <button>update</button>
-      <button onClick={() => setEditing(false)}>cancel</button>
-    </form>
+          updateEntry(entry.id, entry)
+        }}
+      >
+        <label>Date</label>
+        <input 
+          type="text"
+          name="date"
+          value={entry.date}
+          onChange={handleInputChange}
+        />
+        <label>Description</label>
+        <input
+          type="text"
+          name="Description"
+          value={entry.description}
+          onChange={handleInputChange}
+        />
+        <label>Spending</label>
+        <input
+          type="text"
+          name="spending"
+          value={entry.spending}
+          onChange={handleInputChange}
+        />
+        <button>update</button>
+        <button onClick={() => setEditing(false)}>cancel</button>
+      </form>
+    </div>
   )
 }
 

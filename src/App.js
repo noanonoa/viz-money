@@ -53,10 +53,10 @@ const App = () => {
     <div className="container">
       <h1>Viz-Money</h1>
       <VizComponent spendings={spendings} />
-      <div className="flex-parent">
+      <div>
         {editing ? (
-          <div>
-            <h2>Edit Entry</h2>
+          <div className="entry-form">
+            <h2 className="sub-heading">Edit Entry</h2>
             <EditForm 
               setEditing={setEditing}
               currentEntry={currentEntry}
@@ -64,13 +64,13 @@ const App = () => {
             />
           </div>
         ) : (
-          <div>
-            <h2>Add Entry</h2>
+          <div className="entry-form">
+            <h2 className="sub-heading">Add Entry</h2>
             <AddForm addEntry={addEntry} />
           </div>
         )}
         <div className="flex-child1">
-          <h2>Expenditure</h2>
+          <h2 className="expenditure-heading">Expenditure</h2>
         </div>
         <div className="flex-child2">
           <ExpenditureTable spendings={spendings} deleteEntry={deleteEntry} editEntry={editEntry} />
