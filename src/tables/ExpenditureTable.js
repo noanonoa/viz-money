@@ -1,19 +1,18 @@
 import React from 'react'
 
-const FoodTable = ({ foods, editEntry, deleteEntry }) => {
-  // console.log(`🌯🌮 this is the foods data (FoodTable.js):`, {foods})
-  if (foods.length > 0) {
-    const foodEntries = foods.map( food => {
+const ExpenditureTable = ({ spendings, editEntry, deleteEntry }) => {
+  if (spendings.length > 0) {
+    const tableEntries = spendings.map( entry => {
       return (
-        <tr key={food.id}>
-          <td>{food.date}</td>
-          <td>{food.description}</td>
+        <tr key={entry.id}>
+          <td>{entry.date}</td>
+          <td>{entry.description}</td>
           <td>
-            -$ {food.spending}
+            -$ {entry.spending}
           </td>
           <td>
-            <button onClick={() => editEntry(food)}>edit</button>
-            <button onClick={() => deleteEntry(food.id)}>delete</button>
+            <button onClick={() => editEntry(entry)}>edit</button>
+            <button onClick={() => deleteEntry(entry.id)}>delete</button>
           </td>
         </tr>
       )
@@ -28,7 +27,7 @@ const FoodTable = ({ foods, editEntry, deleteEntry }) => {
           </tr>
         </thead>
         <tbody>
-          {foodEntries}
+          {tableEntries}
         </tbody>
       </table>
     )
@@ -54,4 +53,4 @@ const FoodTable = ({ foods, editEntry, deleteEntry }) => {
   }
 }
 
-export default FoodTable
+export default ExpenditureTable

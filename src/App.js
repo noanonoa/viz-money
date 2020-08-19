@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import FoodTable from './tables/FoodTable'
+import ExpenditureTable from './tables/ExpenditureTable'
 import AddForm from './forms/AddForm'
 import EditForm from './forms/EditForm'
 import VizComponent from './components/VizComponent'
 
 const App = () => {
-  const foodData = [
+  const financialData = [
     {id: 1, date: "2020-08-09", description: "Popeyes", spending: 12.11},
     {id: 2, date: "2020-08-12", description: "Jersey Mikes", spending: 11.22},
     {id: 3, date: "2020-08-14", description: "Chick-fil-A", spending: 11.75},
@@ -16,14 +16,14 @@ const App = () => {
     {id: 8, date: "2020-08-19", description: "Tender Greens", spending: 21.75}
   ]
 
-  const [foods, setFoods] = useState(foodData)
+  const [spendings, setSpendings] = useState(financialData)
   const [editing, setEditing] = useState(false)
   const initialFormState = { id: null, date: ``, description: ``, spending: `` }
   const [currentEntry, setCurrentEntry] = useState(initialFormState)
 
   const addEntry = (entry) => {
-    entry.id = foods.length + 1
-    setFoods([...foods, entry])
+    entry.id = spendings.length + 1
+    setSpendings([...spendings, entry])
   }
   const editEntry = (entry) => {
     setEditing(true)
@@ -33,18 +33,18 @@ const App = () => {
   const updateEntry = (id, updatedEntry) => {
     setEditing(false)
 
-    setFoods(foods.map( entry => entry.id === id ? updatedEntry : entry ))
+    setSpendings(spendings.map( entry => entry.id === id ? updatedEntry : entry ))
   }
   const deleteEntry = (id) => {
     setEditing(false)
 
-    setFoods(foods.filter( entry => entry.id !== id ))
+    setSpendings(spendings.filter( entry => entry.id !== id ))
   }
 
   return (
     <div className="container">
       <h1>Viz-Money</h1>
-      <VizComponent foods={foods} />
+      <VizComponent spendings={spendings} />
       <div className="flex-parent">
         {editing ? (
           <div>
@@ -62,10 +62,10 @@ const App = () => {
           </div>
         )}
         <div className="flex-child1">
-          <h2>Food</h2>
+          <h2>Expenditure</h2>
         </div>
         <div className="flex-child2">
-          <FoodTable foods={foods} deleteEntry={deleteEntry} editEntry={editEntry} />
+          <ExpenditureTable spendings={spendings} deleteEntry={deleteEntry} editEntry={editEntry} />
         </div>
       </div>
     </div>

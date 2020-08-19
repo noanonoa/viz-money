@@ -3,7 +3,7 @@ import { select, axisBottom, scaleUtc, extent, axisLeft, scaleLinear, max, line 
 
 const VizComponent = (props) => {
   const svgRef = useRef()
-  const data = Object.assign(props.foods.map(({ date, spending }) => ({date: new Date(date), value: spending})), {y: "$ Spent"})
+  const data = Object.assign(props.spendings.map(({ date, spending }) => ({date: new Date(date), value: spending})), {y: "$ Spent"})
   const graphLine = line()
     .defined(d => !isNaN(d.value))
     .x(d => x(d.date))
@@ -48,7 +48,7 @@ const VizComponent = (props) => {
       .attr("stroke-linecap", "round")
       .attr("d", graphLine)
 
-  }, [props.foods, data, graphLine])
+  }, [props.spendings, data, graphLine])
   
   return (
     <div className="viz-container">
