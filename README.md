@@ -8,6 +8,7 @@ The goal was to learn how to implement D3.js in React to have a dynamic chart re
 
 ## Strategy / Approach
 ![image of viz-money-trello](public/img/viz-money-trello.png)
+
 The very first thing I did was create a trello board with tasks to complete the project.  Next, I distributed tasks to each day depending on how much time I needed to reach the goal.  Finally, I broke down any tasks I did not fully comprehend through research and similar solutions.
 
 ## What I Learned
