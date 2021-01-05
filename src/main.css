@@ -1,78 +1,42 @@
 * {
   @import url(`https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap`);
 }
-body {
-  background-color: #FDF4EB;
-}
-h1 {
-  color: steelblue;
+
+.App {
   text-align: center;
-  font-size: 3em;
-  font-family: 'PT Serif';
 }
-.sub-heading {
-  display: block;
-  font-family: 'PT Serif';
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
 }
-.form-container {
-  display: block;
-  margin-right: 20px;
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
-form > label, button {
-  margin: 0 5px;
-}
-.entry-form {
-  max-width: 960px;
-  margin: 0 auto;
-  margin-top: 50px;
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
-.expenditure-heading {
-  text-align: center;
-  margin-top: 50px;
-  font-family: 'PT Serif';
+
+.App-link {
+  color: #61dafb;
 }
-.expenditure-table {
-  max-width: 960px;
-  margin: 0 auto;
-}
-table {
-  width: 100%;
-  text-align: left;
-}
-th {
-  height: 50px;
-  border-bottom: 1px solid #ddd;
-}
-/* th:nth-child(2), */
-th:nth-child(3),
-th:nth-last-child(1) {
-  text-align: center;
-}
-td {
-  padding: 2px;
-  border-bottom: 1px solid #ddd;
-}
-/* td:nth-child(2), */
-td:nth-child(4) {
-  text-align: center;
-}
-td:nth-child(2) {
-  width: 60%;
-}
-td > button {
-  border: 1px solid #FDF4EB;
-  font-family: inherit;
-  font-size: 80%;
-  background-color: #FDF4EB;
-}
-button:hover {
-  border: 1px solid black;
-}
-form > button {
-  background-color: #FDF4EB;
-  border: 1px solid black;
-  padding: 2px 10px;
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

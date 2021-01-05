@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 
 const AddForm = (props) => {
   const month = () => {
@@ -25,34 +25,38 @@ const AddForm = (props) => {
 
     props.addEntry(entry)
     setEntry(initialFormState)
+    
   }
   return (
-    <div className="form-container">
-      <form onSubmit={ handleSubmit }>
-        <label>Date</label>
+    <Fragment>
+      <h2 className="text-center mt-5">Add Spending</h2>
+      <form className="d-flex justify-content-center" onSubmit={ handleSubmit }>
         <input 
+          className="form-control"
           type="text" 
           name="date" 
-          value={ entry.date } 
+          value={entry.date}
           onChange={ handleInputChange } 
-        />
+          />
         <label>Description</label>
         <input 
+          className="form-control"
           type="text" 
           name="description" 
           value={ entry.description } 
           onChange={ handleInputChange }
-        />
+          />
         <label>Spending</label>
         <input 
+          className="form-control"
           type="text" 
           name="spending" 
           value={ entry.spending } 
           onChange={ handleInputChange }
         />
-        <button>Add</button>
+        <button className="btn btn-primary">Add</button>
       </form>
-    </div>
+    </Fragment>
   )
 }
 

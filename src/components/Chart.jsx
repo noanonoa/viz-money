@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import { select, axisBottom, scaleUtc, extent, axisLeft, scaleLinear, max, line } from 'd3'
 
-const VizComponent = (props) => {
+const Chart = (props) => {
   const svgRef = useRef()
   const data = Object.assign(props.spendings.map(({ date, spending }) => ({date: new Date(date), value: spending})), {y: "$ Spent"})
   const graphLine = line()
@@ -64,4 +64,4 @@ const VizComponent = (props) => {
   )
 }
 
-export default VizComponent
+export default Chart

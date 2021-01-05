@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import ExpenditureTable from './tables/ExpenditureTable'
-import AddForm from './forms/AddForm'
-import EditForm from './forms/EditForm'
-import VizComponent from './components/VizComponent'
+import React, { Fragment, useState } from 'react'
+import Header from './components/Header'
+import Chart from './components/Chart'
+import SpendingsTable from './components/SpendingsTable'
+import AddForm from './components/AddForm'
+import EditForm from './components/EditForm'
 
 const App = () => {
   const financialData = [
@@ -50,33 +51,20 @@ const App = () => {
   }
 
   return (
-    <div className="container">
-      <h1>Viz-Money</h1>
-      <VizComponent spendings={spendings} />
-      <div>
-        {editing ? (
-          <div className="entry-form">
-            <h2 className="sub-heading">Edit Entry</h2>
-            <EditForm 
-              setEditing={setEditing}
-              currentEntry={currentEntry}
-              updateEntry={updateEntry}
-            />
-          </div>
-        ) : (
-          <div className="entry-form">
-            <h2 className="sub-heading">Add Entry</h2>
-            <AddForm addEntry={addEntry} />
-          </div>
-        )}
-        <div className="flex-child1">
-          <h2 className="expenditure-heading">Expenditure</h2>
-        </div>
-        <div className="flex-child2">
-          <ExpenditureTable spendings={spendings} deleteEntry={deleteEntry} editEntry={editEntry} />
-        </div>
-      </div>
-    </div>
+    <Fragment>
+      <Header/>
+      <Chart spendings={spendings} />
+      {editing ? (
+        <EditForm 
+          setEditing={setEditing}
+          currentEntry={currentEntry}
+          updateEntry={updateEntry}
+        />
+      ) : (
+        <AddForm addEntry={addEntry} />
+      )}
+      <SpendingsTable spendings={spendings} deleteEntry={deleteEntry} editEntry={editEntry} />
+    </Fragment>
   );
 }
 

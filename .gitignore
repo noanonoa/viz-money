@@ -21,6 +21,12 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-notes.js
 package-lock.json
+
+.gitignore
+notes.js
+notes.txt
 src/components/TestComponent.js
+database.sql
+app-original.js
+main-noa.css
