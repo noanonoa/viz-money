@@ -13,7 +13,7 @@ The very first thing I did was create a trello board with tasks to complete the 
 
 ![image of db-diagram](public/img/db-diagram.png)
 
-I also thought about the relational database structure and created a wireframe using draw.io.
+I also thought about the relational database structure and created a wireframe using [draw.io](https://app.diagrams.net/).
 
 ## What I Learned
 I could not find any projects on the web similar to mine that I could lean on for learning purposes.  First and foremost, I learned to focus and persevere until I had gotten my answers.  This included reading over React and D3 documentation and testing through trial and error.  I began to understand more of the syntax pertaining to D3 which I had never seen before prior to this project.  I also learned more in depth the various states in React and how they render dynamically throughout each state.

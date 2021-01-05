@@ -10,7 +10,7 @@ const AddForm = (props) => {
   const year = new Date().getFullYear()
   const today = `${year}-${month()}-${date()}`
 
-  const initialFormState = { id: null, date: today, description: ``, spending: `` }
+  const initialFormState = { id: null, date: today, description: ``, amount: `` }
   const [entry, setEntry] = useState(initialFormState)
 
   const handleInputChange = (e) => {
@@ -30,7 +30,8 @@ const AddForm = (props) => {
   return (
     <Fragment>
       <h2 className="text-center mt-5">Add Spending</h2>
-      <form className="d-flex justify-content-center" onSubmit={ handleSubmit }>
+      <form className="d-flex justify-content-center m-4" onSubmit={(e) => handleSubmit(e) }>
+        <label>Date</label>
         <input 
           className="form-control"
           type="text" 
@@ -46,7 +47,7 @@ const AddForm = (props) => {
           value={ entry.description } 
           onChange={ handleInputChange }
           />
-        <label>Spending</label>
+        <label>Amount</label>
         <input 
           className="form-control"
           type="text" 

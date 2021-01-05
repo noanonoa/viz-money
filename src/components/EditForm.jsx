@@ -36,7 +36,7 @@ const EditForm = ({ setEditing, currentEntry, updateEntry }) => {
           value={entry.description}
           onChange={handleInputChange}
         />
-        <label>Spending</label>
+        <label>Amount</label>
         <input
           type="text"
           name="spending"
