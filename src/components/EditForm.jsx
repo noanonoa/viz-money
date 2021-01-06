@@ -39,8 +39,8 @@ const EditForm = ({ setEditing, currentEntry, updateEntry }) => {
         <label>Amount</label>
         <input
           type="text"
-          name="spending"
-          value={entry.spending}
+          name="amount"
+          value={entry.amount}
           onChange={handleInputChange}
         />
         <button>update</button>

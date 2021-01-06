@@ -8,7 +8,7 @@ const SpendingsTable = ({ spendings, editEntry, deleteEntry }) => {
           <td>{entry.date}</td>
           <td>{entry.description}</td>
           <td>
-            -$ {entry.spending}
+            -$ {entry.amount}
           </td>
           <td>
             <button className="btn btn-light btn-sm" onClick={() => editEntry(entry)}>edit</button>
@@ -24,7 +24,7 @@ const SpendingsTable = ({ spendings, editEntry, deleteEntry }) => {
             <tr>
               <th>Date</th>
               <th>Description</th>
-              <th>Spending</th>
+              <th>Amount</th>
               <th>Action</th>
             </tr>
           </thead>

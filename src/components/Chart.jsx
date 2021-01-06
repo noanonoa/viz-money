@@ -3,7 +3,7 @@ import { select, axisBottom, scaleUtc, extent, axisLeft, scaleLinear, max, line 
 
 const Chart = (props) => {
   const svgRef = useRef()
-  const data = Object.assign(props.spendings.map(({ date, spending }) => ({date: new Date(date), value: spending})), {y: "$ Spent"})
+  const data = Object.assign(props.spendings.map(({ date, amount }) => ({date: new Date(date), value: amount})), {y: "$ Spent"})
   const graphLine = line()
     .defined(d => !isNaN(d.value))
     .x(d => x(d.date))
