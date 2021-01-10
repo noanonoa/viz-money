@@ -1,16 +1,19 @@
 import React, { useRef, useEffect } from 'react'
 import { select, axisBottom, scaleUtc, extent, axisLeft, scaleLinear, max, line } from 'd3'
 
-const Chart = (props) => {
+const Chart = ({ spendings }) => {
   const svgRef = useRef()
-  const data = Object.assign(props.spendings.map(({ date, amount }) => ({date: new Date(date), value: amount})), {y: "$ Spent"})
+  const data = Object.assign(spendings.map(({ date, amount }) => ({date: new Date(date), value: amount})), {y: "$ Spent"})
   const graphLine = line()
     .defined(d => !isNaN(d.value))
     .x(d => x(d.date))
     .y(d => y(d.value))
-  const width = 1000
-  const height = 500
-  const margin = {top: 20, right: 30, bottom: 30, left: 40}
+    
+    // chart settings
+    const width = 1000
+    const height = 500
+    const margin = {top: 20, right: 30, bottom: 30, left: 40}
+  
   const x = scaleUtc()
     .domain(extent(data, d => d.date))
     .range([margin.left, width - margin.right])
@@ -29,7 +32,7 @@ const Chart = (props) => {
       .attr("text-anchor", "start")
       .attr("font-weight", "bold")
       .text(data.y))
-
+  // FIXME: chart needs to be inside a callback
   useEffect(() => {
     const svg = select(svgRef.current)
     svg.selectAll("path").remove()
@@ -48,7 +51,8 @@ const Chart = (props) => {
       .attr("stroke-linecap", "round")
       .attr("d", graphLine)
 
-  }, [props.spendings, data, graphLine])
+  // }, [spendings, data, graphLine])
+  }, [spendings, data, graphLine, xAxis, yAxis])
   
   return (
     <div className="viz-container">

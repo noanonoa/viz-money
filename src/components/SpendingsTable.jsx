@@ -1,18 +1,32 @@
 import React, { Fragment } from 'react'
+import EditForm from './EditForm'
 
-const SpendingsTable = ({ spendings, editEntry, deleteEntry }) => {
+const SpendingsTable = ({ 
+  spendings, 
+  deleteEntry, 
+  editEntry, 
+  setEditEntry, 
+  updateEntry,
+  handleEditEntry
+}) => {
   if (spendings.length > 0) {
-    const tableEntries = spendings.map( entry => {
+    const tableEntries = spendings.map( spendingInfo => {
       return (
-        <tr key={entry.id}>
-          <td>{entry.date}</td>
-          <td>{entry.description}</td>
+        <tr key={spendingInfo.id}>
+          <td>{spendingInfo.date}</td>
+          <td>{spendingInfo.description}</td>
           <td>
-            -$ {entry.amount}
+            -$ {spendingInfo.amount}
           </td>
           <td>
-            <button className="btn btn-light btn-sm" onClick={() => editEntry(entry)}>edit</button>
-            <button className="btn btn-light btn-sm" onClick={() => deleteEntry(entry.id)}>delete</button>
+            <EditForm 
+              spendingInfo={spendingInfo}
+              editEntry={editEntry}
+              setEditEntry={setEditEntry}
+              updateEntry={updateEntry}
+              handleEditEntry={handleEditEntry}
+            />
+            <button className="btn btn-light btn-sm" onClick={() => deleteEntry(spendingInfo.id)}>delete</button>
           </td>
         </tr>
       )

@@ -1,11 +1,11 @@
 import React, { Fragment, useState } from 'react'
 import Header from './components/Header'
 import Chart from './components/Chart'
+import AddForm from './components/AddForm'
 import SpendingsTable from './components/SpendingsTable'
-import InputForm from './components/InputForm'
-import EditForm from './components/EditForm'
 
 const App = () => {
+  // database
   const financialData = [
     {id: 1, date: "2020-08-01", description: "Costco & Whole Foods", amount: 267.03},
     {id: 2, date: "2020-08-02", description: "Maria's Kitchen", amount: 20.00},
@@ -24,48 +24,72 @@ const App = () => {
     {id: 15, date: "2020-08-16", description: "Gas", amount: 20.00},
     {id: 16, date: "2020-08-17", description: "Haircut", amount: 115.00}
   ]
+  // Format Date
+  const month = () => {
+    return ("0" + (new Date().getMonth() + 1)).slice(-2)
+  }
+  const date = () => {
+    return ("0" + new Date().getDate()).slice(-2)
+  }
+  const year = new Date().getFullYear()
+  const today = `${year}-${month()}-${date()}`
 
+  // state management
+  const initialFormState = { id: null, date: today, description: ``, amount: `` }
+  
+  // TODO: 'spendings' need to come from a database, This will need axios.get
   const [spendings, setSpendings] = useState(financialData)
-  const [editing, setEditing] = useState(false)
-  const initialFormState = { id: null, date: ``, description: ``, amount: `` }
-  const [currentEntry, setCurrentEntry] = useState(initialFormState)
+  // 'addEntry' for AddForm
+  const [addEntry, setAddEntry] = useState(initialFormState)
+  // 'currentEntry' for EditForm
+  const [editEntry, setEditEntry] = useState(initialFormState)
 
-  const addEntry = (entry) => {
+  // functions
+  const addSpending = (entry) => {
     entry.id = spendings.length + 1
     setSpendings([...spendings, entry])
-    console.log(entry)
-    console.log(entry.id)
+    // TODO: 'spending' comes from financial data.  This will need axios.put
   }
-  const editEntry = (entry) => {
-    setEditing(true)
-
-    setCurrentEntry({ id: entry.id, date: entry.date, description: entry.description, amount: entry.amount })
+  
+  const handleEditEntry = (editEntry) => {
+    setEditEntry({ id: editEntry.id, date: editEntry.date, description: editEntry.description, amount: editEntry.amount })
   }
   const updateEntry = (id, updatedEntry) => {
-    setEditing(false)
-
+    // console.log('coming from editForm line 84 --- "editEntry.Id, editEntry"')
+    // console.log(id)
+    // console.log(updatedEntry)
+    
     setSpendings(spendings.map( entry => entry.id === id ? updatedEntry : entry ))
+    // TODO: 'spendings' comes from financial data.  This will need axios.put
   }
   const deleteEntry = (id) => {
-    setEditing(false)
+    // console.log('coming from SpendingsTable line 29 --- "spendingInfo.Id"')
+    // console.log(id)
 
     setSpendings(spendings.filter( entry => entry.id !== id ))
+    // TODO: 'spendings' comes from financial data.  This will need an axios.delete
   }
 
   return (
     <Fragment>
       <Header/>
-      <Chart spendings={spendings} />
-      {editing ? (
-        <EditForm 
-          setEditing={setEditing}
-          currentEntry={currentEntry}
-          updateEntry={updateEntry}
-        />
-      ) : (
-        <InputForm addEntry={addEntry} />
-      )}
-      <SpendingsTable spendings={spendings} deleteEntry={deleteEntry} editEntry={editEntry} />
+      <Chart 
+        spendings={spendings}
+      />
+      <AddForm
+        addSpending={addSpending}
+        initialFormState={initialFormState}
+        addEntry={addEntry}
+        setAddEntry={setAddEntry}
+      />
+      <SpendingsTable
+        spendings={spendings}
+        deleteEntry={deleteEntry}
+        editEntry={editEntry}
+        setEditEntry={setEditEntry}
+        updateEntry={updateEntry}
+        handleEditEntry={handleEditEntry}
+      />
     </Fragment>
   );
 }
