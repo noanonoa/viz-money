@@ -36,7 +36,7 @@ const Chart = ({ spendings }) => {
       .text(data.y))
   
   const initialRender = () => {
-    console.log('Chart -- ln 40', spendings)
+    // console.log('Chart -- ln 40', spendings)
     const svg = select(svgRef.current)
     svg.selectAll("path").remove()
     svg.selectAll("g").remove()

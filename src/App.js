@@ -1,9 +1,8 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import Header from './components/Header'
-import Chart from './components/Chart'
+// import Chart from './components/Chart'
 import AddForm from './components/AddForm'
 import SpendingsTable from './components/SpendingsTable'
-// import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch, withAxios } from 'react-axios'
 import axios from 'axios'
 
 //TODO: add Budget component
@@ -28,7 +27,6 @@ const App = () => {
   //   {id: 15, date: "2020-08-16", description: "Gas", amount: 20.00},
   //   {id: 16, date: "2020-08-17", description: "Haircut", amount: 115.00}
   // ]
-  // TODO: axios call to database
 
   // Format Date
   const month = () => {
@@ -54,45 +52,81 @@ const App = () => {
     console.log(entry)
     // entry.id = spendings.length + 1
     // setSpendings([...spendings, entry])
-    // TODO: 'spending' goes to database.  This will need axios.post
+    // 'spending' goes to database.  This will need axios.post
     try {
       // post a new entry...
-      console.log(entry.user_id)
+      // console.log(entry.user_id)
       await axios.post('http://localhost:3001/spendings', {
         user_id: entry.user_id,
-        date_created: today,
+        date_created: entry.date_created,
         description: entry.description,
         amount: entry.amount
       })
-      // ...then get the spending_id
-      .then(result => {
-        // console.log('new spending created! the spending_id is:', result.data.spending_id)
-        // console.log('result data', result.data)
-        const newEntry = result.data
-        setSpendings([...spendings, newEntry])
-      })
+        // ...then get the spending_id
+        .then(result => {
+          // console.log('new spending created! the spending_id is:', result.data.spending_id)
+          // console.log('result data', result.data)
+          const newEntry = result.data
+          setSpendings([...spendings, newEntry])
+        })
     } catch (err) {
       console.log(err.message)
     }
   }
-  
-  const handleEditEntry = (editEntry) => {
-    setEditEntry({ id: editEntry.id, date: editEntry.date, description: editEntry.description, amount: editEntry.amount })
+
+  const handleEditEntry = async (editEntry) => {
+    try {
+      // get spending_id from database...
+      await axios.get(`http://localhost:3001/spendings/${editEntry.spending_id}`)
+        // ...then state of opened editForm needs to display the result
+        .then(result => {
+          const dbEntry = result.data
+        
+        setEditEntry(dbEntry)
+        })
+    } catch (err) {
+      console.error(err.message)
+    }
   }
-  const updateEntry = (id, updatedEntry) => {
+
+  const updateEntry = async (id, updatedEntry) => {
     // console.log('coming from editForm line 84 --- "editEntry.Id, editEntry"')
     // console.log(id)
     // console.log(updatedEntry)
     
-    setSpendings(spendings.map( entry => entry.id === id ? updatedEntry : entry ))
-    // TODO: 'spendings' comes from financial data.  This will need axios.put
-  }
-  const deleteEntry = (id) => {
-    // console.log('coming from SpendingsTable line 29 --- "spendingInfo.Id"')
-    // console.log(id)
+    // setSpendings(spendings.map( entry => entry.id === id ? updatedEntry : entry ))
+    // 'spendings' comes from financial data.  This will need axios.put
+    try {
+      await axios.put(`http://localhost:3001/spendings/${id}`, {
+        date_created: updatedEntry.date_created.split('').splice(0,10).join(''),
+        description: updatedEntry.description,
+        amount: updatedEntry.amount
+      })
+        .then(result => {
+          const updatedSpendingInfo = result.data
+          console.log(updatedSpendingInfo)
 
-    setSpendings(spendings.filter( entry => entry.id !== id ))
-    // TODO: 'spendings' comes from financial data.  This will need an axios.delete
+          setSpendings(spendings.map( entry => entry.spending_id === id ? updatedEntry : entry ))
+        })
+    } catch (err) {
+      console.error(err.message)
+    }
+  }
+
+  const deleteEntry = async (id) => {
+    // console.log('coming from SpendingsTable line 29 --- "spendingInfo.Id"')
+    console.log(id)
+
+    // 'spendings' comes from financial data.  This will need an axios.delete
+    try {
+      await axios.delete(`http://localhost:3001/spendings/${id}`)
+        .then(result => {
+          console.log('result.data', result.data)
+          setSpendings(spendings.filter( entry => entry.spending_id !== id ))
+        })
+    } catch (err) {
+      console.error(err.message)
+    }
   }
 
   useEffect( () => {
@@ -107,9 +141,9 @@ const App = () => {
   return (
     <Fragment>
       <Header/>
-      <Chart 
+      {/* <Chart 
         spendings={spendings}
-      />
+      /> */}
       <AddForm
         addSpending={addSpending}
         initialFormState={initialFormState}
