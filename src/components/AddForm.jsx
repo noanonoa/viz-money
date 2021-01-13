@@ -9,6 +9,7 @@ const addForm = ({
   // handlers
   const handleInputChange = (e) => {
     const { name, value } = e.target 
+    // console.log(name, value)
     setAddEntry({ ...addEntry, [name]: value })
   }
 
@@ -58,8 +59,9 @@ const addForm = ({
                     id="dateInput"
                     className="form-control"
                     type="text"
-                    name="date"
+                    name="date_created"
                     value={addEntry.date_created}
+                    // value={addEntry.date_created}
                     onChange={ (e) => handleInputChange(e) }
                   />
                 </div>

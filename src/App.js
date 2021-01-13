@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import Header from './components/Header'
-// import Chart from './components/Chart'
+import Chart from './components/Chart'
 import AddForm from './components/AddForm'
 import SpendingsTable from './components/SpendingsTable'
 import axios from 'axios'
@@ -49,7 +49,7 @@ const App = () => {
 
   // functions
   const addSpending = async (entry) => {
-    console.log(entry)
+    // console.log(entry)
     // entry.id = spendings.length + 1
     // setSpendings([...spendings, entry])
     // 'spending' goes to database.  This will need axios.post
@@ -102,11 +102,14 @@ const App = () => {
         description: updatedEntry.description,
         amount: updatedEntry.amount
       })
-        .then(result => {
-          const updatedSpendingInfo = result.data
-          console.log(updatedSpendingInfo)
+        .then(async (allSpendings) => {
+          // console.log(allSpendings.data)
+          // await axios.get('http://localhost:3001/spendings')
+          // .then(allSpendings => {
+            setSpendings(allSpendings.data)
+          // }) 
 
-          setSpendings(spendings.map( entry => entry.spending_id === id ? updatedEntry : entry ))
+          // setSpendings(spendings.map( entry => entry.spending_id === id ? updatedEntry : entry ))
         })
     } catch (err) {
       console.error(err.message)
@@ -115,15 +118,16 @@ const App = () => {
 
   const deleteEntry = async (id) => {
     // console.log('coming from SpendingsTable line 29 --- "spendingInfo.Id"')
-    console.log(id)
+    // console.log(id)
 
     // 'spendings' comes from financial data.  This will need an axios.delete
     try {
       await axios.delete(`http://localhost:3001/spendings/${id}`)
-        .then(result => {
-          console.log('result.data', result.data)
-          setSpendings(spendings.filter( entry => entry.spending_id !== id ))
+        .then(async (allSpendings) => {
+          // console.log(allSpendings.data)
+            setSpendings(allSpendings.data)
         })
+          // setSpendings(spendings.filter( entry => entry.spending_id !== id ))
     } catch (err) {
       console.error(err.message)
     }
@@ -141,9 +145,9 @@ const App = () => {
   return (
     <Fragment>
       <Header/>
-      {/* <Chart 
+      <Chart 
         spendings={spendings}
-      /> */}
+      />
       <AddForm
         addSpending={addSpending}
         initialFormState={initialFormState}

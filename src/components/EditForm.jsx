@@ -7,17 +7,13 @@ const EditForm = ({
   updateEntry, 
   handleEditEntry
 }) => {
-
   // functions
   const handleInputChange = (e) => {
     const { name, value } = e.target
     
-    // change currentEntry state with what's written in the modal inputs
+    // change editEntry state with what's written in the modal inputs
     setEditEntry({ ...editEntry, [name]: value })
   }
-  // console.log(spendingInfo)
-  // console.log('🔥🔥')
-  // console.log(editEntry)
   return (
     <Fragment>
       <button
@@ -51,7 +47,7 @@ const EditForm = ({
                     id={`editDate${spendingInfo.spending_id}`}
                     className="form-control"
                     type="text"
-                    name="date"
+                    name="date_created"
                     value={editEntry.date_created.split('').splice(0,10).join('')}
                     onChange={ (e) => handleInputChange(e) }
                   />
