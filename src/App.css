@@ -1,6 +1,14 @@
 * {
   @import url(`https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap`);
 }
+body {
+  background-color: #FDF4EB;
+  font-family: 'PT Serif';
+}
+
+h1 {
+  font-family: 'PT Serif';
+}
 
 .App {
   text-align: center;
@@ -30,6 +38,16 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.viz-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-top: 25px;
+}
+
+svg {
+  /* border: 1px solid #000; */
 }
 
 @keyframes App-logo-spin {

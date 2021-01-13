@@ -11,23 +11,22 @@ const EditForm = ({
   const handleInputChange = (e) => {
     const { name, value } = e.target
     
-    // change currentEntry state with what's written in the modal inputs
+    // change editEntry state with what's written in the modal inputs
     setEditEntry({ ...editEntry, [name]: value })
   }
-
   return (
     <Fragment>
       <button
         type="button" 
-        className="btn btn-light btn-sm" 
+        className="btn btn-primary btn-sm mr-1" 
         data-toggle="modal" 
-        data-target={`#editForm${spendingInfo.id}`}
+        data-target={`#editForm${spendingInfo.spending_id}`}
         onClick={() => handleEditEntry(spendingInfo)}
       >
         Edit
       </button>
 
-      <div className="modal fade" id={`editForm${spendingInfo.id}`}>
+      <div className="modal fade" id={`editForm${spendingInfo.spending_id}`}>
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
@@ -45,18 +44,18 @@ const EditForm = ({
                 <div className="form-group">
                   <label htmlFor="editDate">Date</label>
                   <input 
-                    id={`editDate${spendingInfo.id}`}
+                    id={`editDate${spendingInfo.spending_id}`}
                     className="form-control"
                     type="text"
-                    name="date"
-                    value={editEntry.date}
+                    name="date_created"
+                    value={editEntry.date_created.split('').splice(0,10).join('')}
                     onChange={ (e) => handleInputChange(e) }
                   />
                 </div>
                 <div className="form-group">
                   <label htmlFor="editDescription">Description</label>
                   <input
-                    id={`editDescription${spendingInfo.id}`}
+                    id={`editDescription${spendingInfo.spending_id}`}
                     className="form-control"
                     type="text"
                     name="description"
@@ -68,7 +67,7 @@ const EditForm = ({
                 <div className="form-group">
                   <label htmlFor="editAmount">Amount</label>
                   <input
-                    id={`"editAmount${spendingInfo.id}`}
+                    id={`"editAmount${spendingInfo.spending_id}`}
                     className="form-control"
                     type="text"
                     name="amount"
@@ -84,7 +83,7 @@ const EditForm = ({
                 type="button"
                 className="btn btn-primary"
                 data-dismiss="modal"
-                onClick={() => updateEntry(editEntry.id, editEntry)}
+                onClick={() => updateEntry(editEntry.spending_id, editEntry)}
               >
                 Update
               </button>

@@ -11,9 +11,10 @@ const SpendingsTable = ({
 }) => {
   if (spendings.length > 0) {
     const tableEntries = spendings.map( spendingInfo => {
+      const dateCreated = spendingInfo.date_created.split('').splice(0,10).join('')
       return (
-        <tr key={spendingInfo.id}>
-          <td>{spendingInfo.date}</td>
+        <tr key={spendingInfo.spending_id}>
+          <td>{dateCreated}</td>
           <td>{spendingInfo.description}</td>
           <td>
             -$ {spendingInfo.amount}
@@ -26,7 +27,7 @@ const SpendingsTable = ({
               updateEntry={updateEntry}
               handleEditEntry={handleEditEntry}
             />
-            <button className="btn btn-light btn-sm" onClick={() => deleteEntry(spendingInfo.id)}>delete</button>
+            <button className="btn btn-danger btn-sm" onClick={() => deleteEntry(spendingInfo.spending_id)}>Delete</button>
           </td>
         </tr>
       )

@@ -9,13 +9,14 @@ const addForm = ({
   // handlers
   const handleInputChange = (e) => {
     const { name, value } = e.target 
+    // console.log(name, value)
     setAddEntry({ ...addEntry, [name]: value })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     try {
-      if (!addEntry.date || !addEntry.description || !addEntry.amount) return
+      if (!addEntry.date_created || !addEntry.description || !addEntry.amount) return
 
       addSpending(addEntry)
       setAddEntry(initialFormState)
@@ -58,8 +59,9 @@ const addForm = ({
                     id="dateInput"
                     className="form-control"
                     type="text"
-                    name="date"
-                    value={addEntry.date}
+                    name="date_created"
+                    value={addEntry.date_created}
+                    // value={addEntry.date_created}
                     onChange={ (e) => handleInputChange(e) }
                   />
                 </div>
