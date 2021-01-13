@@ -18,7 +18,7 @@ const EditForm = ({
     <Fragment>
       <button
         type="button" 
-        className="btn btn-light btn-sm" 
+        className="btn btn-primary btn-sm mr-1" 
         data-toggle="modal" 
         data-target={`#editForm${spendingInfo.spending_id}`}
         onClick={() => handleEditEntry(spendingInfo)}

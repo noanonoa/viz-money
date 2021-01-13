@@ -6,13 +6,16 @@ const Chart = ({ spendings }) => {
 
   const visualize = (spendings) => {
     // d3 settings for Line Chart
-    const data = Object.assign(spendings.map(({ date_created, amount }) => ({date: new Date(date_created.split('').splice(0,10).join('')), value: amount})), {y: "$ Spent"})
+    const data = Object.assign(spendings.map(({ date_created, amount }) => ({date_created: new Date(date_created.split('').splice(0,10).join('')), value: Number(amount)})), {y: "$ Spent"})
+    console.log(data)
+    // FIXME: the graph's yAxis (amount spent) needs to accumulate when the date is the same as other entries
+    // FIXME: the chart displays weirdly when amounts are far apart in value
     const graphLine = line()
       .defined(d => !isNaN(d.value))
-      .x(d => x(d.date))
+      .x(d => x(d.date_created))
       .y(d => y(d.value))
 
-    // Line Chart display settings
+    // Line Chart display settings relative to div.viz-container
     const width = 1000
     const height = 500
     const margin = {top: 20, right: 30, bottom: 30, left: 40}
@@ -20,7 +23,7 @@ const Chart = ({ spendings }) => {
 
     // Line Chart X, Y Axis
     const x = scaleUtc()
-      .domain(extent(data, d => d.date))
+      .domain(extent(data, d => d.date_created))
       .range([margin.left, width - margin.right])
     const y = scaleLinear()
       .domain([0, max(data, d => d.value)]).nice()
@@ -37,6 +40,9 @@ const Chart = ({ spendings }) => {
         .attr("text-anchor", "start")
         .attr("font-weight", "bold")
         .text(data.y))
+
+    // console.log(y.domain())
+    // console.log(y.range())
 
     const svg = select(svgRef.current)
     svg.selectAll("path").remove()

@@ -144,24 +144,26 @@ const App = () => {
 
   return (
     <Fragment>
-      <Header/>
-      <Chart 
-        spendings={spendings}
-      />
-      <AddForm
-        addSpending={addSpending}
-        initialFormState={initialFormState}
-        addEntry={addEntry}
-        setAddEntry={setAddEntry}
-      />
-      <SpendingsTable
-        spendings={spendings}
-        deleteEntry={deleteEntry}
-        editEntry={editEntry}
-        setEditEntry={setEditEntry}
-        updateEntry={updateEntry}
-        handleEditEntry={handleEditEntry}
-      />
+      <div className="App">
+        <Header/>
+        <Chart 
+          spendings={spendings}
+        />
+        <AddForm
+          addSpending={addSpending}
+          initialFormState={initialFormState}
+          addEntry={addEntry}
+          setAddEntry={setAddEntry}
+        />
+        <SpendingsTable
+          spendings={spendings}
+          deleteEntry={deleteEntry}
+          editEntry={editEntry}
+          setEditEntry={setEditEntry}
+          updateEntry={updateEntry}
+          handleEditEntry={handleEditEntry}
+        />
+    </div>
     </Fragment>
   );
 }
