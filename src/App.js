@@ -46,7 +46,8 @@ const App = () => {
   const [addEntry, setAddEntry] = useState(initialFormState)
   // 'currentEntry' for EditForm
   const [editEntry, setEditEntry] = useState(initialFormState)
-
+  // 'totalSpent'
+  const [totalSpent, setTotalSpent] = useState(0)
   // functions
   const addSpending = async (entry) => {
     // console.log(entry)
@@ -66,8 +67,8 @@ const App = () => {
         .then(result => {
           // console.log('new spending created! the spending_id is:', result.data.spending_id)
           // console.log('result data', result.data)
-          const newEntry = result.data
-          setSpendings([...spendings, newEntry])
+          const allSpendings = result.data
+          setSpendings(allSpendings)
         })
     } catch (err) {
       console.log(err.message)
@@ -148,6 +149,8 @@ const App = () => {
         <Header/>
         <Chart 
           spendings={spendings}
+          totalSpent={totalSpent}
+          setTotalSpent={setTotalSpent}
         />
         <AddForm
           addSpending={addSpending}

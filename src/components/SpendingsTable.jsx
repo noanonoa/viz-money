@@ -27,7 +27,7 @@ const SpendingsTable = ({
               updateEntry={updateEntry}
               handleEditEntry={handleEditEntry}
             />
-            <button className="btn btn-danger btn-sm" onClick={() => deleteEntry(spendingInfo.spending_id)}>Delete</button>
+            <button className="btn btn-secondary btn-sm" onClick={() => deleteEntry(spendingInfo.spending_id)}>Delete</button>
           </td>
         </tr>
       )

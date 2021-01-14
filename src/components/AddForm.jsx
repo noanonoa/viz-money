@@ -9,7 +9,7 @@ const addForm = ({
   // handlers
   const handleInputChange = (e) => {
     const { name, value } = e.target 
-    // console.log(name, value)
+
     setAddEntry({ ...addEntry, [name]: value })
   }
 
@@ -44,7 +44,7 @@ const addForm = ({
         </button>
       </div>
 
-      <div className="modal" id="addForm">
+      <div className="modal fade" id="addForm">
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
@@ -61,7 +61,6 @@ const addForm = ({
                     type="text"
                     name="date_created"
                     value={addEntry.date_created}
-                    // value={addEntry.date_created}
                     onChange={ (e) => handleInputChange(e) }
                   />
                 </div>

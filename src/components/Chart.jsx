@@ -1,15 +1,35 @@
 import React, { useRef, useEffect } from 'react'
 import { select, axisBottom, scaleUtc, extent, axisLeft, scaleLinear, max, line } from 'd3'
 
-const Chart = ({ spendings }) => {
+const Chart = ({ spendings, totalSpent, setTotalSpent }) => {
   const svgRef = useRef()
 
   const visualize = (spendings) => {
     // d3 settings for Line Chart
-    const data = Object.assign(spendings.map(({ date_created, amount }) => ({date_created: new Date(date_created.split('').splice(0,10).join('')), value: Number(amount)})), {y: "$ Spent"})
-    console.log(data)
-    // FIXME: the graph's yAxis (amount spent) needs to accumulate when the date is the same as other entries
-    // FIXME: the chart displays weirdly when amounts are far apart in value
+    let totalByDate = {}
+    let allTotals = []
+    for (let i = 0; i < spendings.length; i++) {
+      const date = spendings[i].date_created.split('').splice(0,10).join('')
+      const amount = Number(spendings[i].amount)
+      if (date in totalByDate) {
+        const endOfDay = totalByDate[date] + amount
+        totalByDate[date] = endOfDay
+      } else {
+        totalByDate[date] = amount
+      }
+    }
+    
+    let totals = 0
+    for (const targetDate in totalByDate) {
+      const targetAmount = totalByDate[targetDate]
+      allTotals.push({date_created: targetDate, amount: targetAmount})
+      totals += targetAmount
+      
+      setTotalSpent(Math.round(totals * 100) / 100)
+    }
+    console.log(`total spent so far: ${totalSpent}`)
+    const data = Object.assign(allTotals.map(({ date_created, amount }) => ({date_created: new Date(date_created.split('').splice(0,10).join('')), value: Number(amount)})), {y: "$ Spent"})
+
     const graphLine = line()
       .defined(d => !isNaN(d.value))
       .x(d => x(d.date_created))
@@ -19,7 +39,6 @@ const Chart = ({ spendings }) => {
     const width = 1000
     const height = 500
     const margin = {top: 20, right: 30, bottom: 30, left: 40}
-    // const margin = {top: 0, right: 0, bottom: 0, left: 0}
 
     // Line Chart X, Y Axis
     const x = scaleUtc()
@@ -41,9 +60,7 @@ const Chart = ({ spendings }) => {
         .attr("font-weight", "bold")
         .text(data.y))
 
-    // console.log(y.domain())
-    // console.log(y.range())
-
+    // render the graph
     const svg = select(svgRef.current)
     svg.selectAll("path").remove()
     svg.selectAll("g").remove()
@@ -64,7 +81,7 @@ const Chart = ({ spendings }) => {
   
   useEffect(() => {
     visualize(spendings)    
-  }, [spendings])
+  }, [spendings, totalSpent])
   
   return (
     <div className="viz-container">
@@ -76,6 +93,9 @@ const Chart = ({ spendings }) => {
           max-height: 500px;
         }
       `}</style>
+      <p className="total-spent mt-2">
+        ${totalSpent} spent so far
+      </p>
     </div>
   )
 }
